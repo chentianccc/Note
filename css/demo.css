@@ -1,0 +1,83 @@
+body,
+div {
+  margin: 0;
+  padding: 0;
+}
+.box {
+  width: 100px;
+  height: 100px;
+  margin: 50px;
+  border: 1px dotted black;
+  border-radius: 5px;
+}
+#memu {
+  background: #111;
+  width: 100px;
+  height: 100px;
+  margin: 50px;
+  border: 1px dotted black;
+  border-radius: 5px;
+}
+.post {
+  background-color: red;
+  background: #111;
+  width: 100px;
+  height: 100px;
+  margin: 50px;
+  border: 1px dotted black;
+  border-radius: 5px;
+}
+.post {
+  background: blue;
+  border: solid 2px #ff0000;
+  border: solid 1px #000000;
+  width: 100px;
+  height: 100px;
+  margin: 50px;
+  border: 1px dotted black;
+  border-radius: 5px;
+  border: none;
+}
+.post:hover {
+  background: gainsboro;
+}
+nav ul {
+  background: blue;
+}
+.inline,
+nav ul {
+  color: red;
+}
+.b,
+.a,
+.c {
+  width: 100px;
+  height: 100px;
+}
+.a {
+  width: 200px;
+}
+.a {
+  color: aqua;
+}
+.c {
+  width: 200px;
+}
+.c {
+  width: 30px;
+  height: 60px;
+}
+.important {
+  background: #000000 !important;
+  color: #ffffff !important;
+  padding: 2px 3px 4px 1px !important;
+  border: dotted 2px #ff0000;
+}
+.max {
+  box-shadow: 2px 5px #000000;
+  border: solid 2px #000000;
+}
+.max {
+  color: #999999;
+  width: 100px;
+}
