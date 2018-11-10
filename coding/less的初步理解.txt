@@ -1,0 +1,228 @@
+1.定义变量的使用的方法
+@width:100px;//是下面的css可以通过调用的时候使用的这个全局调用
+
+.box{
+width:@width;//调用
+}
+
+2.调用的使用的方法
+.box{
+width:100px;
+}
+.hot{
+background:red;
+.box;
+}
+
+3.嵌套的使用
+
+https://www.cnblogs.com/webBlog-gqs/p/7223028.html
+
+@width:100px;
+@height:200px;
+@bgcolor:#000;
+body,div{
+    margin:0;
+    padding: 0;
+}
+.box{
+    width: 100px;
+    height: 100px;
+    margin: 50px;
+    border: 1px dotted black;
+    border-radius: 5px;
+}
+#memu{
+    background: #111;
+    .box;//会将box里的东西加载到post里
+}
+.post{
+    background-color: red;
+    #memu;//会将box里的东西加载到post里
+}
+.noBorder(){
+    border: none;//这个不会出现在原本的css里，只会出现在less里的
+}
+.post{
+    background: blue;
+    .solidBorder(2px,red);//调用参数
+    .solidborder();//默认参数调用哦！
+    .box;
+    .noBorder;
+    &:hover{
+        background: gainsboro;//这个会出现的是hover的可能
+    }
+}
+//参数传参，是为了多次被调用，这样用起来就像共有的css一般，减少重复css
+.solidBorder(@borderWidth,@borderColor){//运用于有css里有三个属性值的
+    border: solid @borderWidth @borderColor;
+}
+
+.solidborder(@borderWidth:1px;@borderColor:black){
+    border: solid @borderWidth @borderColor;//拥有默认参数，如果调用的话，不写就是默认的
+    // 参数调用
+}
+nav ul {
+    background: blue;
+  }
+  .inline,
+  nav ul {
+    color: red;
+  }
+
+  .b{
+      width: 100px;
+      height: 100px;
+  }
+
+  .a:extend(.b) {//匹配到.b和.a的公共项，使得.b和.a拥有一些相同的属性,只是配置到了一个.b选项
+      width: 200px;
+  }
+
+.a{
+    color: aqua;
+}
+
+  .c:extend(.b all){//这个可以配置到所有的.b属性，比如.b.a 或者 .a .b
+      width: 200px;
+  }
+  //同样的对于less可以使用加减乘除
+  @width:100px;
+  @height:100px;
+
+  .c{
+      width: @width+10px;//值得注意到的是对于运算的使用，记得
+
+      height: @height * 2;
+  }
+
+.foo (@bg:#000,@color:#fff,@padding){//这个是混合参数，用于调用函数的使用方法
+    background: @bg;
+    color: @color;
+    padding: @padding;
+}
+
+.setBorder(@borderStyle;@borderWidth;@bordercolor){//这个是单独的参数的调用的，
+    border:@borderStyle @borderWidth @bordercolor;//要和混合参数分开
+
+}
+.important{
+    .foo(@padding:2px 3px 4px 1px) !important;
+    .setBorder(dotted,2px,red);
+}
+// .foo (@bg:#000,@color:#fff,@padding){//这个是函数，用于调用函数的使用方法
+//     background-1: @bg;
+//     color-1: @color;
+//     padding-1: @padding;
+// }
+
+// .important{
+//   .foo (@padding:2px);
+// }
+.box-shadow(@x:0;@y:0;@color:#000){
+    box-shadow: @arguments;
+}
+
+.border(@borderStyle;@borderWidth;@borderColor){
+    border:@arguments;
+
+}
+
+.max {
+    .box-shadow(2px;5px);
+    .border(solid,2px,#000);
+}
+
+.minxin(@_;@color:#000;@width:100px;){
+    color: @color;
+    width: @width;
+    height: @_;
+}
+@height:100px;
+.ma {
+    .minxin(@height;#999); //？？
+}
+
+.mi() {//这个是函数的写法
+    @width:100px;
+    @height:200px;
+}
+//下面是全局的属性，将会被上面的局部属性给覆盖
+//所以输出的是width：100px；height：200px；
+@width:20px;
+@height:30px;
+
+.max {
+    .mi();
+    width: @width;
+    height: @height;
+}
+
+.mixin (@a) when (lightness(@a) >= 50%) {
+    background-color: black;
+  }
+  .mixin (@a) when (lightness(@a) < 50%) {
+    background-color: white;
+  }
+  .mixin (@a) {
+    color: @a;
+  }
+  
+  
+  .class1 { .mixin(#ddd) } 
+  .class2 { .mixin(#555) }
+
+  .loop(@counter) when (@counter > 0) {
+    .loop((@counter - 1));    // 下一次循环（迭代）
+    width: (10px * @counter); //循环（迭代）的结果
+  }
+  
+  div {
+    .loop(5); //循环（迭代）的次数
+  }
+ 
+//   .mixin(@color) {
+//     color-1: @color;
+//   }
+//   .mixin(@color; @padding: 2px) {
+//     color-2: @color;
+//     padding-2: @padding;
+//   }
+//   .mixin(@color; @padding; @margin: 2px) {
+//     color-3: @color;
+//     padding-3: @padding;
+//     margin: @margin @margin @margin @margin;
+//   }
+
+// .mm {
+//     .mixin(#000);
+// }
+.button {
+    &-ok {
+      background-image: url("ok.png");
+    }
+    &-cancel {
+      background-image: url("cancel.png");
+    }
+  
+    &-custom {
+      background-image: url("custom.png");
+    }
+  }
+  .link {
+    & + & {
+      color: red;
+    }
+  
+    & & {
+      color: green;
+    }
+  
+    && {
+      color: blue;
+    }
+  
+    &, &ish {
+      color: cyan;
+    }
+  }
